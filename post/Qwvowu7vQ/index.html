@@ -3,8 +3,8 @@
     <meta charset="utf-8"/>
 <meta name="description" content=""/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Golang Gzip 压缩与解压（附注意事项） | 男友日记</title>
-<link rel="shortcut icon" href="https://woini.men/favicon.ico?v=1587369849081">
+<title>Golang Gzip 压缩与解压（附坑） | 男友日记</title>
+<link rel="shortcut icon" href="https://woini.men/favicon.ico?v=1587370115419">
 <link href="https://cdn.bootcss.com/font-awesome/5.11.2/css/all.css" rel="stylesheet">
 <link rel="stylesheet" href="https://woini.men/styles/main.css">
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
@@ -87,7 +87,7 @@
         <div class="post-detail gt-bg-theme-color-second">
             <article class="gt-post-content">
                 <h2 class="post-title">
-                    Golang Gzip 压缩与解压（附注意事项）
+                    Golang Gzip 压缩与解压（附坑）
                 </h2>
                 <div class="post-info">
                     <time class="post-time gt-c-content-color-first">
@@ -141,7 +141,7 @@ func main() {
 <pre><code class="language-txt">gzip size: 28
 ungzip size: 4
 </code></pre>
-<h2 id="注意事项">注意事项</h2>
+<h2 id="踩到的坑">踩到的坑</h2>
 <p>通常情况下，在实际应用时演示代码中第20行的w.Close()加上defer是没有问题的，但存在有特殊情况。</p>
 <pre><code class="language-go">func Compression(data []byte) ([]byte, error) {
 	var result bytes.Buffer
