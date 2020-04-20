@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://woini.men</id>
     <title>男友日记</title>
-    <updated>2020-04-20T07:27:41.190Z</updated>
+    <updated>2020-04-20T08:04:14.121Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://woini.men"/>
     <link rel="self" href="https://woini.men/atom.xml"/>
@@ -10,6 +10,17 @@
     <logo>https://woini.men/images/avatar.png</logo>
     <icon>https://woini.men/favicon.ico</icon>
     <rights>All rights reserved 2020, 男友日记</rights>
+    <entry>
+        <title type="html"><![CDATA[Golang Gzip 压缩与解压（附注意事项）]]></title>
+        <id>https://woini.men/post/Qwvowu7vQ/</id>
+        <link href="https://woini.men/post/Qwvowu7vQ/">
+        </link>
+        <updated>2020-04-20T07:30:44.000Z</updated>
+        <summary type="html"><![CDATA[<p>Gzip是一种压缩文件格式并且也是一个在类Unix 上的一种文件解压缩的软件，通常指GNU計劃的實現，此處的gzip代表GNU zip。 也經常用來表示gzip這種文件格式。 軟件的作者是Jean-loup Gailly和Mark Adler。</p>
+]]></summary>
+        <content type="html"><![CDATA[<p>Gzip是一种压缩文件格式并且也是一个在类Unix 上的一种文件解压缩的软件，通常指GNU計劃的實現，此處的gzip代表GNU zip。 也經常用來表示gzip這種文件格式。 軟件的作者是Jean-loup Gailly和Mark Adler。</p>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[Wails API接口]]></title>
         <id>https://woini.men/post/Xalsko1zE/</id>

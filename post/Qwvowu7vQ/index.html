@@ -3,7 +3,7 @@
     <meta charset="utf-8"/>
 <meta name="description" content=""/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>男友日记</title>
+<title>Golang Gzip 压缩与解压（附注意事项） | 男友日记</title>
 <link rel="shortcut icon" href="https://woini.men/favicon.ico?v=1587369849081">
 <link href="https://cdn.bootcss.com/font-awesome/5.11.2/css/all.css" rel="stylesheet">
 <link rel="stylesheet" href="https://woini.men/styles/main.css">
@@ -30,11 +30,11 @@
 
 
 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
 </head>
 <body>
 <div class="main gt-bg-theme-color-first">
-    <div class="main-content">
-        <nav class="navbar navbar-expand-lg">
+    <nav class="navbar navbar-expand-lg">
     <div class="navbar-brand">
         <img class="user-avatar" src="/images/avatar.png" alt="头像">
         <div class="site-name gt-c-content-color-first">
@@ -83,22 +83,101 @@
         </div>
     </div>
 </nav>
+    <div class="post-container">
+        <div class="post-detail gt-bg-theme-color-second">
+            <article class="gt-post-content">
+                <h2 class="post-title">
+                    Golang Gzip 压缩与解压（附注意事项）
+                </h2>
+                <div class="post-info">
+                    <time class="post-time gt-c-content-color-first">
+                        · 2020-04-20 ·
+                    </time>
+                    
+                        <a href="https://woini.men/tag/B-NDgGbr6/" class="post-tags">
+                            # gzip
+                        </a>
+                    
+                        <a href="https://woini.men/tag/4xWJy1r5jJ/" class="post-tags">
+                            # golang
+                        </a>
+                    
+                </div>
+                <div class="post-content">
+                    <p>Gzip是一种压缩文件格式并且也是一个在类Unix 上的一种文件解压缩的软件，通常指GNU計劃的實現，此處的gzip代表GNU zip。 也經常用來表示gzip這種文件格式。 軟件的作者是Jean-loup Gailly和Mark Adler。</p>
+<!-- more -->
+<h2 id="演示">演示</h2>
+<pre><code class="language-go">package main
 
-        <div class="tags-container">
-            
-                <a class="tag gt-c-content-color-first gt-a-link"
-                   href="https://woini.men/tag/B-NDgGbr6/">#gzip</a>
-            
-                <a class="tag gt-c-content-color-first gt-a-link"
-                   href="https://woini.men/tag/4xWJy1r5jJ/">#golang</a>
-            
-                <a class="tag gt-c-content-color-first gt-a-link"
-                   href="https://woini.men/tag/w5KwPcybn/">#wails</a>
-            
-                <a class="tag gt-c-content-color-first gt-a-link"
-                   href="https://woini.men/tag/3V0-VKPgA/">#Gridea</a>
-            
+import (
+	&quot;bytes&quot;
+	&quot;compress/gzip&quot;
+	&quot;fmt&quot;
+	&quot;io/ioutil&quot;
+)
+
+func main() {
+
+	var (
+		result bytes.Buffer
+		data = []byte(&quot;test&quot;)
+	)
+	
+	// 压缩
+	w := gzip.NewWriter(&amp;result)
+	w.Write(data)
+	//w.Flush()
+	w.Close()
+	fmt.Println(&quot;gzip size:&quot;, len(result.Bytes()))
+
+	// 解压
+	r, _ := gzip.NewReader(&amp;result)
+	r.Close()
+	undatas, _ := ioutil.ReadAll(r)
+	fmt.Println(&quot;ungzip size:&quot;, len(undatas))
+}
+</code></pre>
+<p>输出如下：</p>
+<pre><code class="language-txt">gzip size: 28
+ungzip size: 4
+</code></pre>
+<h2 id="注意事项">注意事项</h2>
+<p>通常情况下，在实际应用时演示代码中第20行的w.Close()加上defer是没有问题的，但存在有特殊情况。</p>
+<pre><code class="language-go">func Compression(data []byte) ([]byte, error) {
+	var result bytes.Buffer
+
+	gz := gzip.NewWriter(&amp;result)
+    defer gz.Close()
+
+	if _, err := gz.Write(data); err != nil {
+		return nil, err
+	}
+
+    // 注释掉上面的defer gz.Close（），去除下面行的注释
+    // gz.Close()
+
+	return result.Bytes(), nil
+}
+</code></pre>
+<p>如上示例代码，在调用后没有返回错误的情况下，取其结果进行解压，将会喜获<code>unexpected EOF</code>错误。导致问题的罪魁祸首正是defer，当<code>gz.Close()</code>被执行时会向数据末尾写入<code>EOF</code>结束标志，但我们将<code>gz.Close()</code>放到defer中执行时，由于defer是在return确定返回值之后执行，也就导致gz.Close实际没能将EOF写入数据末尾。</p>
+<p>解决方法很简单，不要在defer中调用close即可。</p>
+<h2 id="备注">备注</h2>
+<p>进行解压操作时，在<code>gzip.NewReader()</code>之后可以直接调用Close()，它不会关闭底层的io.Reader，不影响后续读取数据。</p>
+
+                </div>
+            </article>
         </div>
+
+        
+            <div class="next-post">
+                <div class="next gt-c-content-color-first">下一篇</div>
+                <a href="https://woini.men/post/Xalsko1zE/" class="post-title gt-a-link">
+                    Wails API接口
+                </a>
+            </div>
+        
+
+        
 
         <div class="site-footer gt-c-content-color-first">
     <div class="slogan gt-c-content-color-first">十年单身赌今朝，这绝对是女孩们做梦都想看的日记</div>
@@ -129,6 +208,7 @@
 <script>
     hljs.initHighlightingOnLoad()
 </script>
+
 
     </div>
 </div>
