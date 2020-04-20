@@ -1,0 +1,368 @@
+<html>
+<head>
+    <meta charset="utf-8"/>
+<meta name="description" content=""/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Wails 运行时（人/机翻译） | 男友日记</title>
+<link rel="shortcut icon" href="https://woini.men/favicon.ico?v=1587373382167">
+<link href="https://cdn.bootcss.com/font-awesome/5.11.2/css/all.css" rel="stylesheet">
+<link rel="stylesheet" href="https://woini.men/styles/main.css">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+      integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+<script src="https://cdn.bootcss.com/highlight.js/9.15.10/highlight.min.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.15.10/languages/dockerfile.min.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.15.10/languages/dart.min.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.15.10/languages/go.min.js"></script>
+<script src="https://cdn.bootcss.com/moment.js/2.23.0/moment.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+        crossorigin="anonymous"></script>
+
+<!-- DEMO JS -->
+<!--<script src="media/scripts/index.js"></script>-->
+
+
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+</head>
+<body>
+<div class="main gt-bg-theme-color-first">
+    <nav class="navbar navbar-expand-lg">
+    <div class="navbar-brand">
+        <img class="user-avatar" src="/images/avatar.png" alt="头像">
+        <div class="site-name gt-c-content-color-first">
+            男友日记
+        </div>
+    </div>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <i class="fas fa-bars gt-c-content-color-first" style="font-size: 18px"></i>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <div class="navbar-nav mr-auto" style="text-align: center">
+            
+                <div class="nav-item">
+                    
+                        <a href="/" class="menu gt-a-link">
+                            首页
+                        </a>
+                    
+                </div>
+            
+                <div class="nav-item">
+                    
+                        <a href="/archives" class="menu gt-a-link">
+                            归档
+                        </a>
+                    
+                </div>
+            
+                <div class="nav-item">
+                    
+                        <a href="/tags" class="menu gt-a-link">
+                            标签
+                        </a>
+                    
+                </div>
+            
+                <div class="nav-item">
+                    
+                        <a href="/post/about" class="menu gt-a-link">
+                            关于
+                        </a>
+                    
+                </div>
+            
+        </div>
+    </div>
+</nav>
+    <div class="post-container">
+        <div class="post-detail gt-bg-theme-color-second">
+            <article class="gt-post-content">
+                <h2 class="post-title">
+                    Wails 运行时（人/机翻译）
+                </h2>
+                <div class="post-info">
+                    <time class="post-time gt-c-content-color-first">
+                        · 2020-04-20 ·
+                    </time>
+                    
+                        <a href="https://woini.men/tag/w5KwPcybn/" class="post-tags">
+                            # wails
+                        </a>
+                    
+                        <a href="https://woini.men/tag/4xWJy1r5jJ/" class="post-tags">
+                            # golang
+                        </a>
+                    
+                </div>
+                <div class="post-content">
+                    <p>Wails带有一个运行时库，可以从Javascript或Go中访问它。 它具有以下子系统：</p>
+<ul>
+<li>Events</li>
+<li>Logging</li>
+<li>Window</li>
+<li>Dialog</li>
+<li>Browser</li>
+<li>Filesystem</li>
+</ul>
+<blockquote>
+<p>NOTE：目前，Javascript运行时不包括Window和Dialog子系统</p>
+</blockquote>
+<p>当使用WailsInit方法绑定结构时，应用程序将显示Go运行时对象。</p>
+<p>对于前端，可以通过window.wails对象访问运行时。</p>
+<h2 id="events">Events</h2>
+<p>事件子系统提供了一种在整个应用程序中侦听和发出事件的方法。 这意味着您可以侦听Javascript和Go发出的事件，并且您发出的事件将同时被Go和Javascript的侦听器接收。</p>
+<p>在Go运行时中，可以通过<code>runtime.Events</code>访问它，并提供2种方法：<code>Emit</code>和<code>On</code>。</p>
+<h3 id="emit">Emit</h3>
+<pre><code class="language-go">Emit(eventName string, optionalData …interface{})
+</code></pre>
+<p>Emit方法用于在应用程序中发出命名事件。</p>
+<p>第一个参数是要发出的事件的名称。 第二个参数是interface{}类型的可选列表，这意味着您可以随事件传递任意数据。</p>
+<h4 id="实例-1">实例 1：</h4>
+<pre><code class="language-go">func (m *MyStruct) WailsInit(runtime *wails.Runtime) error {
+  runtime.Events.Emit(&quot;initialised&quot;)
+}
+</code></pre>
+<h4 id="实例-2">实例 2：</h4>
+<pre><code class="language-go">func (m *MyStruct) WailsInit(runtime *wails.Runtime) error {
+  t := time.Now()
+  message := fmt.Sprintf(&quot;I was initialised at %s&quot;, t.String())
+  runtime.Events.Emit(&quot;initialised&quot;, message)
+}
+</code></pre>
+<h3 id="on">On</h3>
+<pre><code class="language-go">On(eventName string, callback func(optionalData …interface{}))
+</code></pre>
+<p>On方法用于侦听整个应用程序发出的事件。</p>
+<p>第一个参数是要监听的事件的名称。 第二个参数是在事件发出时调用的函数。 该函数有一个可选参数，它将包含随事件发送的所有数据。</p>
+<h4 id="没有传递数据的事件的示例">没有传递数据的事件的示例：</h4>
+<pre><code class="language-go">func (m *MyStruct) WailsInit(runtime *wails.Runtime) error {
+  runtime.Events.On(&quot;initialised&quot;, func(...interface{}) {
+    fmt.Println(&quot;I received the 'initialised' event!&quot;)
+  })
+  return nil
+}
+</code></pre>
+<h4 id="传递数据的事件的示例">传递数据的事件的示例：</h4>
+<pre><code class="language-go">func (m *MyStruct) WailsInit(runtime *wails.Runtime) error {
+  runtime.Events.On(&quot;hello&quot;, func(data ...interface{}) {
+    // You should probably do better error checking
+    fmt.Printf(&quot;I received the 'initialised' event with the message '%s'!\n&quot;, data[0])
+  })
+  return nil
+}
+</code></pre>
+<h2 id="logging">Logging</h2>
+<p>日志子系统允许您将各种日志级别的消息记录到应用程序日志中。</p>
+<h3 id="new">New</h3>
+<pre><code class="language-go">New(prefix string)
+</code></pre>
+<p>以下代码演示使用给定的前缀创建一个新的自定义Logger。</p>
+<pre><code class="language-go">type MyStruct struct {
+	log *wails.CustomLogger
+}
+
+func (m *MyStruct) WailsInit(runtime *wails.Runtime) error {
+	m.log = runtime.Log.New(&quot;MyStruct&quot;)
+	return nil
+}
+</code></pre>
+<p>创建后，您可以使用记录器的任何方法：</p>
+<h4 id="standard-logging">Standard logging</h4>
+<p>这些方法中的每一个都采用一个字符串（例如fmt.Println）：</p>
+<ul>
+<li>Debug</li>
+<li>Info</li>
+<li>Warn</li>
+<li>Error</li>
+<li>Fatal</li>
+</ul>
+<pre><code class="language-go"> m.Log.Info(&quot;This is fine&quot;)
+</code></pre>
+<h4 id="formatted-logging">Formatted logging</h4>
+<p>这些方法中的每一个都采用字符串和可选数据（例如fmt.Printf）：</p>
+<ul>
+<li>Debugf</li>
+<li>Infof</li>
+<li>Warnf</li>
+<li>Errorf</li>
+<li>Fatalf</li>
+</ul>
+<pre><code class="language-go">feeling := &quot;okay&quot;
+m.Log.Info(&quot;I'm %s with the events that are currently unfolding&quot;, feeling)
+</code></pre>
+<h4 id="field-logging">Field logging</h4>
+<p>这些方法中的每一个都采用一个字符串和一组字段：</p>
+<ul>
+<li>DebugFields</li>
+<li>InfoFields</li>
+<li>WarnFields</li>
+<li>ErrorFields</li>
+<li>FatalFields</li>
+</ul>
+<pre><code class="language-go">m.Log.InfoFields(&quot;That's okay&quot;, wails.Fields{
+&quot;things are going to be&quot;: &quot;okay&quot;,
+})
+</code></pre>
+<h2 id="dialog">Dialog</h2>
+<p>Dialog子系统可让您激活Webview的本机对话框。</p>
+<p>可通过runtime.Dialog访问它，并具有以下方法：</p>
+<blockquote>
+<p>NOTE：打开对话框将停止Javascript执行，就像浏览器一样</p>
+</blockquote>
+<h3 id="选择文件">选择文件</h3>
+<pre><code class="language-go">SelectFile()
+</code></pre>
+<p>提示用户选择要打开的文件。 返回文件的路径。</p>
+<pre><code class="language-go">selectedFile := runtime.Dialog.SelectFile()
+</code></pre>
+<h3 id="选择目录">选择目录</h3>
+<pre><code class="language-go">SelectDirectory()
+</code></pre>
+<p>提示用户选择目录。 返回目录的路径。</p>
+<pre><code class="language-go">selectedDirectory := runtime.Dialog.SelectDirectory()
+</code></pre>
+<h3 id="选择保存文件">选择保存文件</h3>
+<pre><code class="language-go">SelectSaveFile()
+</code></pre>
+<p>提示用户选择文件保存位置。 返回文件的路径。</p>
+<pre><code class="language-go">selectedFile := runtime.Dialog.SelectSaveFile()
+</code></pre>
+<h2 id="window">Window</h2>
+<p>Window子系统提供了与应用程序主窗口进行交互的方法。</p>
+<h3 id="setcolour">SetColour</h3>
+<pre><code class="language-go">SetColour(colour string) error
+</code></pre>
+<p>将窗口的背景色设置为为其指定的颜色（字符串）。 可以用以下格式指定颜色：</p>
+<table>
+<thead>
+<tr>
+<th>Colour Type</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>RGB</td>
+<td>rgb(0, 0, 0)</td>
+</tr>
+<tr>
+<td>RGBA</td>
+<td>rgba(0, 0, 0, 0.8)</td>
+</tr>
+<tr>
+<td>HEX</td>
+<td>#fff</td>
+</tr>
+</tbody>
+</table>
+<pre><code class="language-go"> runtime.Window.SetColour(&quot;#eee&quot;)
+</code></pre>
+<h3 id="fullscreen">Fullscreen</h3>
+<pre><code class="language-go">Fullscreen()
+</code></pre>
+<p>尝试使应用程序窗口全屏显示。 如果使用选项<code>Resizable: false</code>启动应用程序，将失败。</p>
+<pre><code class="language-go">runtime.Window.Fullscreen()
+</code></pre>
+<h3 id="unfullscreen">UnFullscreen</h3>
+<pre><code class="language-go">UnFullscreen()
+</code></pre>
+<p>尝试在全屏调用之前将窗口还原回其大小。 如果使用选项<code>Resize: false</code>启动应用程序，将失败。</p>
+<pre><code class="language-go">//runtime.Window.UnFullscreen()
+UnFullscreen()
+</code></pre>
+<h3 id="settitle">SetTitle</h3>
+<pre><code class="language-go">SetTitle(title string)
+</code></pre>
+<p>在应用程序标题栏中设置标题。</p>
+<pre><code class="language-go">runtime.Window.SetTitle(&quot;We'll need a bigger boat&quot;)
+</code></pre>
+<h3 id="close">Close</h3>
+<p>关闭主窗口，从而终止应用程序。 小心使用！</p>
+<pre><code class="language-go">runtime.Window.Close()
+</code></pre>
+<h2 id="browser">Browser</h2>
+<p>浏览器子系统提供了与系统浏览器进行交互的方法。</p>
+<h3 id="openurl">OpenURL</h3>
+<pre><code class="language-go">OpenURL(url string)
+</code></pre>
+<p>在系统浏览器中打开给定的URL。</p>
+<pre><code class="language-go">runtime.Browser.OpenURL(&quot;https://wails.app&quot;)
+</code></pre>
+<h2 id="filesystem">Filesystem</h2>
+<p>文件系统子系统提供了一种访问文件系统相关方法的方法。 当前，这<code>仅限于Go</code>。</p>
+<h3 id="homedir">HomeDir</h3>
+<pre><code class="language-go">HomeDir() (string, error)
+</code></pre>
+<p>返回用户的主目录或错误。</p>
+<pre><code class="language-go">runtime.Filesystem.HomeDir()
+</code></pre>
+<h2 id="常见模式">常见模式</h2>
+<p>运行时的常见模式是简单地将其保存在结构体中，并在需要时使用它：</p>
+<pre><code class="language-go">type MyStruct struct {
+	Runtime  *wails.Runtime
+}
+
+func (m *MyStruct) WailsInit(r *wails.Runtime) error {
+	m.Runtime = r
+}
+</code></pre>
+
+                </div>
+            </article>
+        </div>
+
+        
+            <div class="next-post">
+                <div class="next gt-c-content-color-first">下一篇</div>
+                <a href="https://woini.men/post/Qwvowu7vQ/" class="post-title gt-a-link">
+                    Golang Gzip 压缩与解压（附坑）
+                </a>
+            </div>
+        
+
+        
+
+        <div class="site-footer gt-c-content-color-first">
+    <div class="slogan gt-c-content-color-first">十年单身赌今朝，这绝对是女孩们做梦都想看的日记</div>
+    <div class="social-container">
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+    </div>
+    <div class="footer-info">
+        Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a>
+    </div>
+    <div>
+        Theme by <a href="https://imhanjie.com/" target="_blank">imhanjie</a>, Powered by <a
+                href="https://github.com/getgridea/gridea" target="_blank">Gridea | <a href="https://woini.men/atom.xml" target="_blank">RSS</a></a>
+    </div>
+</div>
+
+<script>
+    hljs.initHighlightingOnLoad()
+</script>
+
+
+    </div>
+</div>
+</body>
+</html>
