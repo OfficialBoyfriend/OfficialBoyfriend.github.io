@@ -4,7 +4,7 @@
 <meta name="description" content=""/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 <title>Wails API接口 | 男友日记</title>
-<link rel="shortcut icon" href="https://woini.men/favicon.ico?v=1587366551749">
+<link rel="shortcut icon" href="https://woini.men/favicon.ico?v=1587367619982">
 <link href="https://cdn.bootcss.com/font-awesome/5.11.2/css/all.css" rel="stylesheet">
 <link rel="stylesheet" href="https://woini.men/styles/main.css">
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
@@ -316,7 +316,7 @@ bound.backend.RobotHellobackend.Robot.privateMethod
   }
   ...
 </code></pre>
-<p>在Javascript中，使用新用户名的调用将返回一个Promise，该Promise将没有任何价值。 使用现有用户名进行的调用将返回一个Promise，该Promise将被拒绝，错误设置为：</p>
+<p>在Javascript中，调用<code>MyStruct.AddUser</code>并传递一个不存在的用户名，将返回一个Promise，该Promise没有值。使用已存在的用户名调用<code>MyStruct.AddUser</code>时将返回一个Promise，该Promise将被拒绝(reject)，错误设置为用户<code>user '$name' already exists</code>(用户'$name'已经存在)。</p>
 <pre><code class="language-javascript">.MyStruct.MyBoundMethodMyStruct.MyBoundMethoduser'$ name'
 </code></pre>
 <p>建议最好返回两个值，一个结果和一个错误，因为这直接映射到Javascript Promise。 如果不返回任何东西的话，或许事件可能是更好的选择。</p>
