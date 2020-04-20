@@ -4,7 +4,7 @@
 <meta name="description" content=""/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 <title>Golang Gzip 压缩与解压（附坑） | 男友日记</title>
-<link rel="shortcut icon" href="https://woini.men/favicon.ico?v=1587370115419">
+<link rel="shortcut icon" href="https://woini.men/favicon.ico?v=1587370457289">
 <link href="https://cdn.bootcss.com/font-awesome/5.11.2/css/all.css" rel="stylesheet">
 <link rel="stylesheet" href="https://woini.men/styles/main.css">
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
@@ -161,7 +161,51 @@ ungzip size: 4
 </code></pre>
 <p>如上示例代码，在调用后没有返回错误的情况下，取其结果进行解压，将会喜获<code>unexpected EOF</code>错误。导致问题的罪魁祸首正是defer，当<code>gz.Close()</code>被执行时会向数据末尾写入<code>EOF</code>结束标志，但我们将<code>gz.Close()</code>放到defer中执行时，由于defer是在return确定返回值之后执行，也就导致gz.Close实际没能将EOF写入数据末尾。</p>
 <p>解决方法很简单，不要在defer中调用close即可。</p>
-<h2 id="备注">备注</h2>
+<h2 id="实例">实例</h2>
+<pre><code class="language-go">package utils
+
+import (
+	&quot;bytes&quot;
+	&quot;compress/gzip&quot;
+	&quot;io/ioutil&quot;
+)
+
+func Compression(data []byte) ([]byte, error) {
+	var result bytes.Buffer
+
+	gz := gzip.NewWriter(&amp;result)
+
+	if _, err := gz.Write(data); err != nil {
+		return nil, err
+	}
+
+	if err := gz.Close(); err != nil {
+		return nil, err
+	}
+
+	return result.Bytes(), nil
+}
+
+func UnCompression(data []byte) ([]byte, error) {
+	dataTmp := bytes.NewReader(data)
+
+	r, err := gzip.NewReader(dataTmp)
+	if err != nil {
+		return nil, err
+	}
+	if err = r.Close(); err != nil {
+		return nil, err
+	}
+
+	result, err := ioutil.ReadAll(r)
+	if err != nil {
+		return nil, err
+	}
+
+	return result, nil
+}
+</code></pre>
+<h2 id="附注">附注</h2>
 <p>进行解压操作时，在<code>gzip.NewReader()</code>之后可以直接调用Close()，它不会关闭底层的io.Reader，不影响后续读取数据。</p>
 
                 </div>
