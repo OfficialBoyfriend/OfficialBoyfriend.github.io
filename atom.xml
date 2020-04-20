@@ -2,14 +2,25 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://woini.men</id>
     <title>男友日记</title>
-    <updated>2020-04-20T05:13:43.140Z</updated>
+    <updated>2020-04-20T07:08:19.907Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://woini.men"/>
     <link rel="self" href="https://woini.men/atom.xml"/>
-    <subtitle>温故而知新</subtitle>
+    <subtitle>十年单身赌今朝，这绝对是每个女孩都想看的日记</subtitle>
     <logo>https://woini.men/images/avatar.png</logo>
     <icon>https://woini.men/favicon.ico</icon>
     <rights>All rights reserved 2020, 男友日记</rights>
+    <entry>
+        <title type="html"><![CDATA[Wails API接口]]></title>
+        <id>https://woini.men/post/Xalsko1zE/</id>
+        <link href="https://woini.men/post/Xalsko1zE/">
+        </link>
+        <updated>2020-04-20T05:26:07.000Z</updated>
+        <summary type="html"><![CDATA[<p>只有 Web 前端没有任何意义，除非您能够与系统交互。Wails通过<code>绑定</code>实现此目,使Go代码可以从前端调用。</p>
+]]></summary>
+        <content type="html"><![CDATA[<p>只有 Web 前端没有任何意义，除非您能够与系统交互。Wails通过<code>绑定</code>实现此目,使Go代码可以从前端调用。</p>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[Hello Gridea]]></title>
         <id>https://woini.men/post/hello-gridea/</id>

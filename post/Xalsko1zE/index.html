@@ -1,0 +1,375 @@
+<html>
+<head>
+    <meta charset="utf-8"/>
+<meta name="description" content=""/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Wails API接口 | 男友日记</title>
+<link rel="shortcut icon" href="https://woini.men/favicon.ico?v=1587366496016">
+<link href="https://cdn.bootcss.com/font-awesome/5.11.2/css/all.css" rel="stylesheet">
+<link rel="stylesheet" href="https://woini.men/styles/main.css">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+      integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+<script src="https://cdn.bootcss.com/highlight.js/9.15.10/highlight.min.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.15.10/languages/dockerfile.min.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.15.10/languages/dart.min.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.15.10/languages/go.min.js"></script>
+<script src="https://cdn.bootcss.com/moment.js/2.23.0/moment.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+        crossorigin="anonymous"></script>
+
+<!-- DEMO JS -->
+<!--<script src="media/scripts/index.js"></script>-->
+
+
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+</head>
+<body>
+<div class="main gt-bg-theme-color-first">
+    <nav class="navbar navbar-expand-lg">
+    <div class="navbar-brand">
+        <img class="user-avatar" src="/images/avatar.png" alt="头像">
+        <div class="site-name gt-c-content-color-first">
+            男友日记
+        </div>
+    </div>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <i class="fas fa-bars gt-c-content-color-first" style="font-size: 18px"></i>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <div class="navbar-nav mr-auto" style="text-align: center">
+            
+                <div class="nav-item">
+                    
+                        <a href="/" class="menu gt-a-link">
+                            首页
+                        </a>
+                    
+                </div>
+            
+                <div class="nav-item">
+                    
+                        <a href="/archives" class="menu gt-a-link">
+                            归档
+                        </a>
+                    
+                </div>
+            
+                <div class="nav-item">
+                    
+                        <a href="/tags" class="menu gt-a-link">
+                            标签
+                        </a>
+                    
+                </div>
+            
+                <div class="nav-item">
+                    
+                        <a href="/post/about" class="menu gt-a-link">
+                            关于
+                        </a>
+                    
+                </div>
+            
+        </div>
+    </div>
+</nav>
+    <div class="post-container">
+        <div class="post-detail gt-bg-theme-color-second">
+            <article class="gt-post-content">
+                <h2 class="post-title">
+                    Wails API接口
+                </h2>
+                <div class="post-info">
+                    <time class="post-time gt-c-content-color-first">
+                        · 2020-04-20 ·
+                    </time>
+                    
+                        <a href="https://woini.men/tag/w5KwPcybn/" class="post-tags">
+                            # wails
+                        </a>
+                    
+                        <a href="https://woini.men/tag/4xWJy1r5jJ/" class="post-tags">
+                            # golang
+                        </a>
+                    
+                </div>
+                <div class="post-content">
+                    <p>只有 Web 前端没有任何意义，除非您能够与系统交互。Wails通过<code>绑定</code>实现此目,使Go代码可以从前端调用。</p>
+<!-- more -->
+<p>有两种类型的代码可以绑定到前端：</p>
+<ol>
+<li>函数</li>
+<li>结构体方法</li>
+</ol>
+<p>绑定成功后，它们便可以在前端调用。</p>
+<h2 id="绑定函数">绑定函数</h2>
+<p>绑定函数只需要调用#.Bind方法，其参数即是你想绑定的函数。</p>
+<pre><code class="language-go">package main
+
+import (
+  &quot;github.com/wailsapp/wails&quot;
+  &quot;fmt&quot;
+)
+
+func Greet(name string) string {
+  return fmt.Printf(&quot;Hello %s!&quot;, name)
+}
+
+func main() {
+
+  app := wails.CreateApp(&amp;wails.AppConfig{
+    Width:  1024,
+    Height: 768,
+  })
+  // 绑定函数
+  app.Bind(Greet)
+  app.Run()
+}
+</code></pre>
+<p>当程序运行时，在全局<code>backend</code>对象下提供名为<code>Greet</code>的 Javascript 函数。函数可以通过<code>.</code>调用。动态生成的函数返回标准promise。因此，对于这个简单示例，您可以这样打印结果：</p>
+<pre><code class="language-javascript">.backend.Greetbackend.Greet(&quot;World&quot;)backend.Greet(&quot;World&quot;).then(console.log)
+</code></pre>
+<h3 id="类型转换">类型转换</h3>
+<p>标量类型（Scalar type）将自动转换为相关的 Go 类型。而对于对象类型(Object type)，Hashicorp的mapstructure包为你提供了将其解析为Go中具体类型的能力。</p>
+<h4 id="例子">例子:</h4>
+<p>使用默认 Vue 模板项目，对<code>main.go</code>稍加修改以包括我们的结构和回调功能。</p>
+<pre><code class="language-go">  type MyData struct {
+    A string
+    B float64
+    C int64
+  }
+
+  // 我们期望以下形式的javascript对象：
+  // { A: &quot;&quot;, B: 0.0, C: 0 }
+  func basic(data map[string]interface{}) string {
+    var result MyData
+    fmt.Printf(&quot;data: %#v\n&quot;, data)
+
+    err := mapstructure.Decode(data, &amp;result)
+    if err != nil {
+      // 错误处理
+    }
+    fmt.Printf(&quot;result: %#v\n&quot;, result)
+    return &quot;Hello World!&quot;
+  }
+</code></pre>
+<p>在前端，我们更新<code>HelloWorld.vue</code>组件中的方法<code>getMessage</code>以发送对象。</p>
+<pre><code class="language-javascript">    getMessage: function() {
+      var self = this;
+      var mytestStruct = {
+        A: &quot;hello&quot;,
+        B: 1.1,
+        C: 99
+      }
+      window.backend.basic(mytestStruct).then(result =&gt; {
+        self.message = result;
+      });
+    }
+    ```
+当程序正常运行时，您将获得以下输出：
+```json
+data: map[string]interface {}{&quot;A&quot;:&quot;hello&quot;, &quot;B&quot;:1.1, &quot;C&quot;:99}
+Result: main.MyData{A:&quot;hello&quot;, B:1.1, C:99}
+</code></pre>
+<blockquote>
+<p><font color=red>WARNING: 建议业务逻辑和数据结构主要位于应用程序的Go部分中，并使用事件将更新发送到前端。 在两个地方管理状态会导致很多不愉快的事情发生。</font></p>
+</blockquote>
+<h2 id="结构方法">结构方法</h2>
+<p>可以通过与绑定函数类似的方式将struct方法绑定到前端。 这是通过绑定希望在前端使用的结构实例来完成的。 完成此操作后，该结构的<code>所有公共方法将对前端可用</code>。 wails没有尝试甚至不相信将数据绑定到前端是一件好事。 wails认为前端主要是一个视图层，其状态和业务逻辑通常由Go中的后端处理。 这样，您绑定到前端的结构应被视为业务逻辑上的“包装器(wrapper)”或“接口(interface)”。</p>
+<p>绑定一个结构很容易：</p>
+<blockquote>
+<p>robot.go</p>
+</blockquote>
+<pre><code class="language-go">package main
+
+import &quot;fmt&quot;
+
+type Robot struct {
+	Name string
+}
+
+func NewRobot() *Robot {
+	result := &amp;Robot{
+		Name: &quot;Robbie&quot;,
+	}
+	return result
+}
+
+func (t *Robot) Hello(name string) string {
+	return fmt.Sprintf(&quot;Hello %s! My name is %s&quot;, name, t.Name)
+}
+
+func (t *Robot) Rename(name string) string {
+	t.Name = name
+	return fmt.Sprintf(&quot;My name is now '%s'&quot;, t.Name)
+}
+
+func (t *Robot) privateMethod(name string) string {
+	t.Name = name
+	return fmt.Sprintf(&quot;My name is now '%s'&quot;, t.Name)
+}
+</code></pre>
+<blockquote>
+<p>main.go</p>
+</blockquote>
+<pre><code class="language-go">package main
+
+import &quot;github.com/wailsapp/wails&quot;
+
+func main() {
+	app := wails.CreateApp(&amp;wails.AppConfig{
+		Width:  1024,
+		Height: 768,
+		Title:  &quot;Binding Structs&quot;,
+	})
+
+	app.Bind(NewRobot())
+	app.Run()
+}
+</code></pre>
+<p>如果绑定了Robot结构，则可以在前端使用它。 Robot结构具有两个已导出方法(Hello、Rename)，因此可以在此处调用该方法。 需要注意的是，privateMethod方法未导出，因此不会被绑定到前端。</p>
+<pre><code class="language-javascript">bound.backend.RobotHellobackend.Robot.Hello
+bound.backend.RobotHellobackend.Robot.Rename
+bound.backend.RobotHellobackend.Robot.privateMethod
+</code></pre>
+<p>这是通过以调试模式运行应用程序并使用检查器来演示其工作方式的示例：<br>
+<img src="https://woini.men/post-images/1587362986663.png" alt="" loading="lazy"></p>
+<h3 id="结构体初始化">结构体初始化</h3>
+<p>如果您的结构具有特殊的初始化方法，那么Wails将在启动时调用它。 该方法的签名是：</p>
+<pre><code class="language-go">WailsInit(runtime *wails.Runtime) error
+</code></pre>
+<p>这使您可以在启动主应用程序之前进行一些初始化。</p>
+<pre><code class="language-go"> type MyStruct struct {
+    runtime *wails.Runtime
+  }
+
+  func (s *MyStruct) WailsInit(runtime *wails.Runtime) error {
+    // 保存运行时
+    s.runtime = runtime
+
+    // 进行其他一些初始化
+
+    return nil
+  }
+</code></pre>
+<p>如果返回错误，则应用程序将记录错误并关闭。</p>
+<p><code>传递给它的运行时对象是在运行时与应用程序进行交互的主要手段</code>。 它由许多子系统组成，这些子系统提供对系统不同部分的访问。</p>
+<h3 id="结构体关闭">结构体关闭</h3>
+<p>如果您的结构具有特殊的关闭方法，那么Wails会在应用程序关闭期间调用它。 该方法的签名是：</p>
+<pre><code class="language-go">WailsShutdown()
+</code></pre>
+<p>这使您可以在终止主应用程序时清理所有资源。</p>
+<pre><code class="language-go">  type MyStruct struct {
+    runtime *wails.Runtime
+  }
+
+  func (s *MyStruct) WailsInit(runtime *wails.Runtime) error {
+    // 保存运行时
+    s.runtime = runtime
+
+    // 分配一些资源
+
+    return nil
+  }
+
+
+  func (s *MyStruct) WailsShutdown() {
+    
+    // 释放一些资源...
+
+}
+</code></pre>
+<h2 id="绑定规则">绑定规则</h2>
+<p>只要遵循以下规则，任何Go函数（或方法）都可以绑定：</p>
+<ul>
+<li>必须返回0-2个结果。</li>
+<li>如果有2个返回参数，则最后一个必须是错误类型。</li>
+<li>如果返回结构或结构指针，则您希望在前端访问的字段必须定义Go的标准json结构标签。</li>
+</ul>
+<p>如果仅返回一个值，则取决于是否为错误类型，该值将在Promise的resolve或reject部分中可用。</p>
+<h3 id="实例-1">实例 1:</h3>
+<pre><code class="language-go">  func (m *MyStruct) MyBoundMethod(name string) string {
+    return fmt.Sprintf(&quot;Hello %s!&quot;, name)
+  }
+</code></pre>
+<p>在Javascript中，正确的调用将返回一个Promise，该Promise将使用字符串进行解析。</p>
+<pre><code class="language-javascript">MyStruct.MyBoundMethod
+</code></pre>
+<h3 id="实例-2">实例 2</h3>
+<pre><code class="language-go">  ...
+  func (m *MyStruct) AddUser(name string) error {
+    if m.userExists(name) {
+      return fmt.Errorf(&quot;user '%s' already exists&quot;);
+    }
+    m.saveUser(name)
+    return nil
+  }
+  ...
+</code></pre>
+<p>在Javascript中，使用新用户名的调用将返回一个Promise，该Promise将没有任何价值。 使用现有用户名进行的调用将返回一个Promise，该Promise将被拒绝，错误设置为：</p>
+<pre><code class="language-javascript">.MyStruct.MyBoundMethodMyStruct.MyBoundMethoduser'$ name'
+</code></pre>
+<p>建议最好返回两个值，一个结果和一个错误，因为这直接映射到Javascript Promise。 如果不返回任何东西的话，或许事件可能是更好的选择。</p>
+<h2 id="重要细节">重要细节</h2>
+<p>要考虑的一个非常重要的细节是，对绑定的Go代码的所有调用都在其自己的goroutine中运行。 在编写任何绑定函数时都应牢记这一点。 这样做的原因是确保绑定的代码不会阻止应用程序中的主事件循环，从而导致UI冻结。</p>
+
+                </div>
+            </article>
+        </div>
+
+        
+            <div class="next-post">
+                <div class="next gt-c-content-color-first">下一篇</div>
+                <a href="https://woini.men/post/hello-gridea/" class="post-title gt-a-link">
+                    Hello Gridea
+                </a>
+            </div>
+        
+
+        
+
+        <div class="site-footer gt-c-content-color-first">
+    <div class="slogan gt-c-content-color-first">十年单身赌今朝，这绝对是每个女孩都想看的日记</div>
+    <div class="social-container">
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+    </div>
+    <div class="footer-info">
+        Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a>
+    </div>
+    <div>
+        Theme by <a href="https://imhanjie.com/" target="_blank">imhanjie</a>, Powered by <a
+                href="https://github.com/getgridea/gridea" target="_blank">Gridea | <a href="https://woini.men/atom.xml" target="_blank">RSS</a></a>
+    </div>
+</div>
+
+<script>
+    hljs.initHighlightingOnLoad()
+</script>
+
+
+    </div>
+</div>
+</body>
+</html>
