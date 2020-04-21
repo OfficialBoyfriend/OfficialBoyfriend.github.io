@@ -4,7 +4,7 @@
 <meta name="description" content=""/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 <title>Wails 运行时（人/机翻译） | 男友日记</title>
-<link rel="shortcut icon" href="https://woini.men/favicon.ico?v=1587374750182">
+<link rel="shortcut icon" href="https://woini.men/favicon.ico?v=1587479557389">
 <link href="https://cdn.bootcss.com/font-awesome/5.11.2/css/all.css" rel="stylesheet">
 <link rel="stylesheet" href="https://woini.men/styles/main.css">
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
@@ -119,7 +119,7 @@
 <p>NOTE：目前，Javascript运行时不包括Window和Dialog子系统</p>
 </blockquote>
 <p>当使用WailsInit方法绑定结构时，应用程序将显示Go运行时对象。</p>
-<p>对于前端，可以通过window.wails对象访问运行时。</p>
+<p><code>对于前端，可以通过window.wails对象访问运行时。</code></p>
 <h2 id="events">Events</h2>
 <p>事件子系统提供了一种在整个应用程序中侦听和发出事件的方法。 这意味着您可以侦听Javascript和Go发出的事件，并且您发出的事件将同时被Go和Javascript的侦听器接收。</p>
 <p>在Go运行时中，可以通过<code>runtime.Events</code>访问它，并提供2种方法：<code>Emit</code>和<code>On</code>。</p>
