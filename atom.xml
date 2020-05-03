@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://woini.men</id>
     <title>男友日记</title>
-    <updated>2020-05-01T14:09:26.448Z</updated>
+    <updated>2020-05-03T08:42:01.170Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://woini.men"/>
     <link rel="self" href="https://woini.men/atom.xml"/>
@@ -10,6 +10,13 @@
     <logo>https://woini.men/images/avatar.png</logo>
     <icon>https://woini.men/favicon.ico</icon>
     <rights>All rights reserved 2020, 男友日记</rights>
+    <entry>
+        <title type="html"><![CDATA[Golang接收者小记]]></title>
+        <id>https://woini.men/post/hVdDMTLdV/</id>
+        <link href="https://woini.men/post/hVdDMTLdV/">
+        </link>
+        <updated>2020-05-03T08:17:54.000Z</updated>
+    </entry>
     <entry>
         <title type="html"><![CDATA[Git忽略规则「.gitignore」用法]]></title>
         <id>https://woini.men/post/DMsE6GA6O/</id>

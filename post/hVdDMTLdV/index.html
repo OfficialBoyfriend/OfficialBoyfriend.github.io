@@ -3,7 +3,7 @@
     <meta charset="utf-8"/>
 <meta name="description" content=""/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>wails | 男友日记</title>
+<title>Golang接收者小记 | 男友日记</title>
 <link rel="shortcut icon" href="https://woini.men/favicon.ico?v=1588495317274">
 <link href="https://cdn.bootcss.com/font-awesome/5.11.2/css/all.css" rel="stylesheet">
 <link rel="stylesheet" href="https://woini.men/styles/main.css">
@@ -30,11 +30,11 @@
 
 
 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
 </head>
 <body>
 <div class="main gt-bg-theme-color-first">
-    <div class="main-content">
-        <nav class="navbar navbar-expand-lg">
+    <nav class="navbar navbar-expand-lg">
     <div class="navbar-brand">
         <img class="user-avatar" src="/images/avatar.png" alt="头像">
         <div class="site-name gt-c-content-color-first">
@@ -83,88 +83,44 @@
         </div>
     </div>
 </nav>
-        <div class="current-tag-container">
-            <h2 class="title gt-c-content-color-first">
-                #wails
-            </h2>
+    <div class="post-container">
+        <div class="post-detail gt-bg-theme-color-second">
+            <article class="gt-post-content">
+                <h2 class="post-title">
+                    Golang接收者小记
+                </h2>
+                <div class="post-info">
+                    <time class="post-time gt-c-content-color-first">
+                        · 2020-05-03 ·
+                    </time>
+                    
+                        <a href="https://woini.men/tag/4xWJy1r5jJ/" class="post-tags">
+                            # golang
+                        </a>
+                    
+                </div>
+                <div class="post-content">
+                    <p>方法能给用户自定义的类型添加新的行为。<code>方法和函数的区别在于方法有一个接收者</code>，给一个函数添加一个接收者，它就变成了方法。接收者可以是<code>值接收者</code>，也可以是<code>指针接收者</code>。</p>
+<p>在调用方法的时候，值类型既可以调用值接收者的方法，也可以调用指针接收者的方法。指针类型既可以调用指针接收者的方法，也可以调用值接收者的方法。这归功于Go 的<code>自动解引用与取引用</code>。</p>
+<p><s><code>如果实现了接收者是值类型的方法，会隐含地也实现了接收者是指针类型的方法。</code></s></p>
+<p>————————————————<br>
+版权声明：本文为CSDN博主「惜暮」的原创文章，遵循CC 4.0 BY-SA版权协议，转载请附上原文出处链接及本声明。<br>
+原文链接：blog.csdn.net/u010853261/java/article/details/100941972</p>
+
+                </div>
+            </article>
         </div>
-        <div class="post-list-container">
-    <div class="post-inner">
-        
-            <div class="post gt-bg-theme-color-second">
-                <div class="post-left">
-                    <div>
-                        
-                        <a href="https://woini.men/post/X2NL2VHpW/">
-                            <span class="post-title gt-c-content-color-first">Wails 运行时（人/机翻译）</span>
-                        </a>
-                    </div>
-                    <div class="gt-post-content post-abstract gt-c-content-color-second">
-                        <p>Wails带有一个运行时库，可以从Javascript或Go中访问它。</p>
 
-                    </div>
-                    <div class="post-info">
-                        <time class="post-time gt-c-content-color-first">
-                            发布于 · 2020-04-20 ·
-                        </time>
-                        
-                            <a href="https://woini.men/tag/w5KwPcybn/" class="post-tag">
-                                # wails
-                            </a>
-                        
-                            <a href="https://woini.men/tag/4xWJy1r5jJ/" class="post-tag">
-                                # golang
-                            </a>
-                        
-                    </div>
-                </div>
-                
-                    <a href="https://woini.men/post/X2NL2VHpW/" class="post-feature-image"
-                       style="background-image: url('https://woini.men/post-images/X2NL2VHpW.png')">
-                    </a>
-                
+        
+            <div class="next-post">
+                <div class="next gt-c-content-color-first">下一篇</div>
+                <a href="https://woini.men/post/DMsE6GA6O/" class="post-title gt-a-link">
+                    Git忽略规则「.gitignore」用法
+                </a>
             </div>
         
-            <div class="post gt-bg-theme-color-second">
-                <div class="post-left">
-                    <div>
-                        
-                        <a href="https://woini.men/post/Xalsko1zE/">
-                            <span class="post-title gt-c-content-color-first">Wails API接口（人/机翻译）</span>
-                        </a>
-                    </div>
-                    <div class="gt-post-content post-abstract gt-c-content-color-second">
-                        <p>只有 Web 前端没有任何意义，除非您能够与系统交互。Wails通过<code>绑定</code>实现此目,使Go代码可以从前端调用。</p>
 
-                    </div>
-                    <div class="post-info">
-                        <time class="post-time gt-c-content-color-first">
-                            发布于 · 2020-04-20 ·
-                        </time>
-                        
-                            <a href="https://woini.men/tag/w5KwPcybn/" class="post-tag">
-                                # wails
-                            </a>
-                        
-                            <a href="https://woini.men/tag/4xWJy1r5jJ/" class="post-tag">
-                                # golang
-                            </a>
-                        
-                    </div>
-                </div>
-                
-                    <a href="https://woini.men/post/Xalsko1zE/" class="post-feature-image"
-                       style="background-image: url('https://woini.men/post-images/Xalsko1zE.png')">
-                    </a>
-                
-            </div>
         
-    </div>
-</div>
-        <div class="pagination-container">
-    
-    
-</div>
 
         <div class="site-footer gt-c-content-color-first">
     <div class="slogan gt-c-content-color-first">十年单身赌今朝，这绝对是女孩们做梦都想看的日记</div>
@@ -195,6 +151,7 @@
 <script>
     hljs.initHighlightingOnLoad()
 </script>
+
 
     </div>
 </div>
