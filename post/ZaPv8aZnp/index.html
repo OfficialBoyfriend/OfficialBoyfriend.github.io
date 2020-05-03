@@ -3,7 +3,7 @@
     <meta charset="utf-8"/>
 <meta name="description" content=""/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Golang Gzip 压缩与解压（附坑） | 男友日记</title>
+<title>PHP利用反射将现有对象属性值赋值给目标对象中对应属性 | 男友日记</title>
 <link rel="shortcut icon" href="https://woini.men/favicon.ico?v=1588512103418">
 <link href="https://cdn.bootcss.com/font-awesome/5.11.2/css/all.css" rel="stylesheet">
 <link rel="stylesheet" href="https://woini.men/styles/main.css">
@@ -87,126 +87,59 @@
         <div class="post-detail gt-bg-theme-color-second">
             <article class="gt-post-content">
                 <h2 class="post-title">
-                    Golang Gzip 压缩与解压（附坑）
+                    PHP利用反射将现有对象属性值赋值给目标对象中对应属性
                 </h2>
                 <div class="post-info">
                     <time class="post-time gt-c-content-color-first">
-                        · 2020-04-20 ·
+                        · 2020-05-03 ·
                     </time>
                     
-                        <a href="https://woini.men/tag/B-NDgGbr6/" class="post-tags">
-                            # gzip
-                        </a>
-                    
-                        <a href="https://woini.men/tag/4xWJy1r5jJ/" class="post-tags">
-                            # golang
+                        <a href="https://woini.men/tag/vxzdxuCju/" class="post-tags">
+                            # php
                         </a>
                     
                 </div>
                 <div class="post-content">
-                    <p>Gzip是一种压缩文件格式并且也是一个在类Unix 上的一种文件解压缩的软件，通常指GNU計劃的實現，此處的gzip代表GNU zip。 也經常用來表示gzip這種文件格式。 軟件的作者是Jean-loup Gailly和Mark Adler。</p>
-<!-- more -->
-<h2 id="演示">演示</h2>
-<pre><code class="language-go">package main
+                    <pre><code class="language-php">&lt;?php
 
-import (
-	&quot;bytes&quot;
-	&quot;compress/gzip&quot;
-	&quot;fmt&quot;
-	&quot;io/ioutil&quot;
-)
-
-func main() {
-
-	var (
-		result bytes.Buffer
-		data = []byte(&quot;test&quot;)
-	)
+class User{
+    public $name;
+	public $age;
+	private $description;
 	
-	// 压缩
-	w := gzip.NewWriter(&amp;result)
-	w.Write(data)
-	//w.Flush()
-	w.Close()
-	fmt.Println(&quot;gzip size:&quot;, len(result.Bytes()))
-
-	// 解压
-	r, _ := gzip.NewReader(&amp;result)
-	r.Close()
-	undatas, _ := ioutil.ReadAll(r)
-	fmt.Println(&quot;ungzip size:&quot;, len(undatas))
-}
-</code></pre>
-<p>输出如下：</p>
-<pre><code class="language-txt">gzip size: 28
-ungzip size: 4
-</code></pre>
-<h2 id="踩到的坑">踩到的坑</h2>
-<p>通常情况下，在实际应用时演示代码中第20行的w.Close()加上defer是没有问题的，但存在有特殊情况。</p>
-<pre><code class="language-go">func Compression(data []byte) ([]byte, error) {
-	var result bytes.Buffer
-
-	gz := gzip.NewWriter(&amp;result)
-    defer gz.Close()
-
-	if _, err := gz.Write(data); err != nil {
-		return nil, err
-	}
-
-    // 注释掉上面的defer gz.Close（），去除下面行的注释
-    // gz.Close()
-
-	return result.Bytes(), nil
-}
-</code></pre>
-<p>如上示例代码，在调用后没有返回错误的情况下，取其结果进行解压，将会喜获<code>unexpected EOF</code>错误。导致问题的罪魁祸首正是defer，当<code>gz.Close()</code>被执行时会向数据末尾写入<code>EOF</code>结束标志，但我们将<code>gz.Close()</code>放到defer中执行时，由于defer是在return确定返回值之后执行，也就导致gz.Close实际没能将EOF写入数据末尾。</p>
-<p>解决方法很简单，不要在defer中调用close即可。</p>
-<h2 id="实例">实例</h2>
-<pre><code class="language-go">package utils
-
-import (
-	&quot;bytes&quot;
-	&quot;compress/gzip&quot;
-	&quot;io/ioutil&quot;
-)
-
-func Compression(data []byte) ([]byte, error) {
-	var result bytes.Buffer
-
-	gz := gzip.NewWriter(&amp;result)
-
-	if _, err := gz.Write(data); err != nil {
-		return nil, err
-	}
-
-	if err := gz.Close(); err != nil {
-		return nil, err
-	}
-
-	return result.Bytes(), nil
+	public function __construct($name,$age,$description){
+        $this-&gt;name = $name;
+        $this-&gt;age = $age;
+        $this-&gt;description = $description;
+    }
 }
 
-func UnCompression(data []byte) ([]byte, error) {
-	dataTmp := bytes.NewReader(data)
-
-	r, err := gzip.NewReader(dataTmp)
-	if err != nil {
-		return nil, err
-	}
-	if err = r.Close(); err != nil {
-		return nil, err
-	}
-
-	result, err := ioutil.ReadAll(r)
-	if err != nil {
-		return nil, err
-	}
-
-	return result, nil
+class About{
+    public $name;
+	public $age;
+	
+	public function __toString(){
+        return &quot;姓名：&quot;.$this-&gt;name.&quot;，年龄：&quot;.$this-&gt;age;
+    }
 }
+
+$source = new User(&quot;Admin&quot;, 18, &quot;test&quot;);
+$aims = new About();
+$sourceObject = new ReflectionObject($source);
+	
+foreach ($sourceObject-&gt;getProperties(ReflectionProperty::IS_PUBLIC) as $object) {
+    foreach ($source as $key =&gt; $item) {
+        if ($key != $object-&gt;getName()) {
+			continue;
+        }
+        $object-&gt;setValue($aims,$item);
+    }
+}
+
+echo $aims;
+
+?&gt;
 </code></pre>
-<h2 id="附注">附注</h2>
-<p>进行解压操作时，在<code>gzip.NewReader()</code>之后可以直接调用Close()，它不会关闭底层的io.Reader，不影响后续读取数据。</p>
 
                 </div>
             </article>
@@ -215,8 +148,8 @@ func UnCompression(data []byte) ([]byte, error) {
         
             <div class="next-post">
                 <div class="next gt-c-content-color-first">下一篇</div>
-                <a href="https://woini.men/post/Xalsko1zE/" class="post-title gt-a-link">
-                    Wails API接口（人/机翻译）
+                <a href="https://woini.men/post/hVdDMTLdV/" class="post-title gt-a-link">
+                    Golang接收者小记
                 </a>
             </div>
         
