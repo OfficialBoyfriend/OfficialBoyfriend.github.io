@@ -4,7 +4,7 @@
 <meta name="description" content=""/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 <title>ABB工业机器人工具坐标系小记 | 男友日记</title>
-<link rel="shortcut icon" href="https://woini.men/favicon.ico?v=1588830499093">
+<link rel="shortcut icon" href="https://woini.men/favicon.ico?v=1588830691939">
 <link href="https://cdn.bootcss.com/font-awesome/5.11.2/css/all.css" rel="stylesheet">
 <link rel="stylesheet" href="https://woini.men/styles/main.css">
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
@@ -104,13 +104,13 @@
                     
                 </div>
                 <div class="post-content">
-                    <h3 id="工具坐标系用途">工具坐标系用途</h3>
+                    <h3 id="用途">用途</h3>
 <p>机器人系统对其位置的描述和控制都是以机器人的工具<code>TCP（Tool Center Point）</code>为基准。</p>
-<h3 id="自定义工具坐标系优势">自定义工具坐标系优势</h3>
+<h3 id="优势">优势</h3>
 <p>机器人工具更换后，只需重新定义工具TCP，程序无需修改即可运行。</p>
-<h3 id="默认工具坐标系原点">默认工具坐标系原点</h3>
+<h3 id="默认原点">默认原点</h3>
 <p>默认工具坐标系(tool0)原点在机器人末轴的法栏盘中心，垂直方向为Z轴。</p>
-<h3 id="工具坐标系参数">工具坐标系参数</h3>
+<h3 id="参数">参数</h3>
 <ul>
 <li><code>mass（实际质量）</code></li>
 <li><code>cog（重心）</code></li>
@@ -119,8 +119,8 @@
 <blockquote>
 <p>通常只需要根据实际情况修改<code>mass</code>与<code>cog</code>参数，其余参数保持默认值。</p>
 </blockquote>
-<h3 id="定义工具坐标系">定义工具坐标系</h3>
-<p>定义工具坐标系有三种方式，分别是：<code>TCP(默认方向)</code>、<code>TCP和Z</code>、<code>TCP和Z,X</code>。</p>
+<h3 id="自定义">自定义</h3>
+<p>自定义工具坐标系有三种方式，分别是：<code>TCP(默认方向)</code>、<code>TCP和Z</code>、<code>TCP和Z,X</code>。</p>
 <ul>
 <li>TCP(默认方向)：需提供<code>四个基本点</code>，该方式创建的工具坐标系与默认工具坐标系(tool0)方向完全一致。</li>
 <li>TCP和Z：需提供<code>四个基本点</code>与<code>一个延申点（Z）</code>，该方式创建工具坐标系<code>自定义Z方向</code>，X、Y与TCP默认方向保持一致。</li>
@@ -129,7 +129,7 @@
 <blockquote>
 <p>无论采用哪种定义方式，<code>都会将工具中心点从法兰盘中心移动到工具相应位置（通常为工具末端）</code>。</p>
 </blockquote>
-<h3 id="自定义工具坐标系原点">自定义工具坐标系原点</h3>
+<h3 id="自定义原点">自定义原点</h3>
 <p>自定义工具坐标系原点位于自定义工具坐标系时所提供的<code>四个基本点进行线性延申后相交位置</code>。</p>
 <h3 id="步骤参考">步骤参考</h3>
 <p><img src="https://woini.men/post-images/1588829718999.jpeg" alt="" loading="lazy"><br>
