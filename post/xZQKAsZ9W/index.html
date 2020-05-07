@@ -4,7 +4,7 @@
 <meta name="description" content=""/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 <title>ABB工业机器人工具坐标系小记 | 男友日记</title>
-<link rel="shortcut icon" href="https://woini.men/favicon.ico?v=1588829175191">
+<link rel="shortcut icon" href="https://woini.men/favicon.ico?v=1588829273149">
 <link href="https://cdn.bootcss.com/font-awesome/5.11.2/css/all.css" rel="stylesheet">
 <link rel="stylesheet" href="https://woini.men/styles/main.css">
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
@@ -104,7 +104,7 @@
 <p>机器人系统对其位置的描述和控制都是以机器人的工具<code>TCP（Tool Center Point）</code>为基准。</p>
 <h3 id="默认工具中心点">默认工具中心点</h3>
 <p>默认工具中心点位于<code>工具法兰盘中心</code></p>
-<h3 id="参数配置">参数配置</h3>
+<h3 id="工具坐标系参数">工具坐标系参数</h3>
 <p><code>mass(实际质量)</code>、<code>cog(工具重心)</code>为必须根据实际情况修改的参数，其余参数通常保持默认值不需要修改。</p>
 <h3 id="定义工具坐标系">定义工具坐标系</h3>
 <p>定义工具坐标系有三种方式，分别是：<code>TCP(默认方向)</code>、<code>TCP和Z</code>、<code>TCP和Z,X</code>。</p>
@@ -116,7 +116,7 @@
 <blockquote>
 <p>无论采用哪种定义方式，都会<code>移动中心点到工具相应位置（通常为工具末端）</code>。</p>
 </blockquote>
-<h3 id="工具中心点">工具中心点</h3>
+<h3 id="自定义工具中心点">自定义工具中心点</h3>
 <p>工具中心点位于自定义工具坐标系时所提供的<code>四个基本点进行线性延申后相交位置</code>。</p>
 
                 </div>
