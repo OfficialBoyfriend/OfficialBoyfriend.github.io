@@ -3,7 +3,7 @@
     <meta charset="utf-8"/>
 <meta name="description" content=""/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>关于 | 男友日记</title>
+<title>ABB工业机器人工具坐标系小记 | 男友日记</title>
 <link rel="shortcut icon" href="https://woini.men/favicon.ico?v=1588828551265">
 <link href="https://cdn.bootcss.com/font-awesome/5.11.2/css/all.css" rel="stylesheet">
 <link rel="stylesheet" href="https://woini.men/styles/main.css">
@@ -87,31 +87,44 @@
         <div class="post-detail gt-bg-theme-color-second">
             <article class="gt-post-content">
                 <h2 class="post-title">
-                    关于
+                    ABB工业机器人工具坐标系小记
                 </h2>
                 <div class="post-info">
                     <time class="post-time gt-c-content-color-first">
-                        · 2019-01-25 ·
+                        · 2020-05-07 ·
                     </time>
+                    
+                        <a href="https://woini.men/tag/4RKJcJnKa/" class="post-tags">
+                            # abb
+                        </a>
                     
                 </div>
                 <div class="post-content">
-                    <blockquote>
-<p>欢迎来到我的小站呀，很高兴遇见你！🤝</p>
-</blockquote>
-<h2 id="关于本站">🏠 关于本站</h2>
-<p>本站主要目的是记录一些博猪自己常用的内容，大部分是转载留以备用。</p>
-<h2 id="博主是谁">👨‍💻 博主是谁</h2>
-<p>是我。</p>
-<h2 id="兴趣爱好">⛹ 兴趣爱好</h2>
-<p>热爱运动，兴趣广泛，比如羽毛球、羽毛球、羽毛球之类的。</p>
-<h2 id="联系我呀">📬 联系我呀</h2>
-<p>QQ: 1624649818</p>
+                    <h3 id="默认工具中心点">默认工具中心点</h3>
+<p>默认工具中心点位于<code>工具法兰盘中心</code></p>
+<h3 id="参数配置">参数配置</h3>
+<p><code>mass(实际质量)</code>、<code>cog(工具重心)</code>为必须根据实际情况修改的参数，其余参数通常保持默认值不需要修改。</p>
+<h3 id="定义工具坐标系">定义工具坐标系</h3>
+<p>定义工具坐标系有三种方式，分别是：<code>TCP(默认方向)</code>、<code>TCP和Z</code>、<code>TCP和Z,X</code>。</p>
+<ul>
+<li>TCP(默认方向)：需提供<code>四个基本点</code>，该方式创建的工具坐标系与工具法兰盘坐标系方向完全一致，仅<code>移动中心点到工具相应位置</code>。</li>
+<li>TCP和Z：需提供<code>四个基本点</code>与<code>一个延申点（Z）</code>，该方式创建工具坐标系<code>可自定义Z方向</code>，X、Y与TCP默认方向保持一致，并<code>移动中心点到工具相应位置</code>。</li>
+<li>TCP和Z,X：需提供<code>四个基本点</code>与<code>两个延申点（Z、X）</code>，该方式创建工具坐标系<code>可自定义Z与X方向</code>，由于X方向改变Y方向也会受改变，同样也会<code>移动中心点到工具相应位置</code>。</li>
+</ul>
+<h3 id="工具中心点">工具中心点</h3>
+<p>工具中心点位于自定义工具坐标系时所提供的<code>四个基本点进行线性延申后相交位置</code>。</p>
 
                 </div>
             </article>
         </div>
 
+        
+            <div class="next-post">
+                <div class="next gt-c-content-color-first">下一篇</div>
+                <a href="https://woini.men/post/ZaPv8aZnp/" class="post-title gt-a-link">
+                    PHP利用反射将现有对象属性值赋值给目标对象中对应属性
+                </a>
+            </div>
         
 
         
