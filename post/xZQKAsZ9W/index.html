@@ -4,7 +4,7 @@
 <meta name="description" content=""/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 <title>ABB工业机器人工具坐标系小记 | 男友日记</title>
-<link rel="shortcut icon" href="https://woini.men/favicon.ico?v=1588829386006">
+<link rel="shortcut icon" href="https://woini.men/favicon.ico?v=1588829651734">
 <link href="https://cdn.bootcss.com/font-awesome/5.11.2/css/all.css" rel="stylesheet">
 <link rel="stylesheet" href="https://woini.men/styles/main.css">
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
@@ -109,7 +109,14 @@
 <h3 id="默认工具中心点">默认工具中心点</h3>
 <p>默认工具中心点位于<code>工具法兰盘中心</code></p>
 <h3 id="工具坐标系参数">工具坐标系参数</h3>
-<p><code>mass(实际质量)</code>、<code>cog(工具重心)</code>为必须根据实际情况修改的参数，其余参数通常保持默认值不需要修改。</p>
+<ul>
+<li><code>mass（实际质量）</code></li>
+<li><code>cog（重心）</code></li>
+<li><code>aom（各轴惯性距）</code></li>
+</ul>
+<blockquote>
+<p>通常只需要根据实际情况修改<code>mass</code>与<code>cog</code>参数，其余参数保持默认值。</p>
+</blockquote>
 <h3 id="定义工具坐标系">定义工具坐标系</h3>
 <p>定义工具坐标系有三种方式，分别是：<code>TCP(默认方向)</code>、<code>TCP和Z</code>、<code>TCP和Z,X</code>。</p>
 <ul>
