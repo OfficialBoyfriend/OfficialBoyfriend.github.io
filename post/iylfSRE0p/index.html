@@ -3,7 +3,7 @@
     <meta charset="utf-8"/>
 <meta name="description" content=""/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Dart的日常: 延时执行 | 男友日记</title>
+<title>ABB工业机器人编程小记：Fine与z0的区别 | 男友日记</title>
 <link rel="shortcut icon" href="https://woini.men/favicon.ico?v=1588933950522">
 <link href="https://cdn.bootcss.com/font-awesome/5.11.2/css/all.css" rel="stylesheet">
 <link rel="stylesheet" href="https://woini.men/styles/main.css">
@@ -87,24 +87,38 @@
         <div class="post-detail gt-bg-theme-color-second">
             <article class="gt-post-content">
                 <h2 class="post-title">
-                    Dart的日常: 延时执行
+                    ABB工业机器人编程小记：Fine与z0的区别
                 </h2>
                 <div class="post-info">
                     <time class="post-time gt-c-content-color-first">
-                        · 2020-04-30 ·
+                        · 2020-05-08 ·
                     </time>
                     
-                        <a href="https://woini.men/tag/x-Esozvy9/" class="post-tags">
-                            # dart
+                        <a href="https://woini.men/tag/BHk7eWKDI/" class="post-tags">
+                            # 学渣笔记
+                        </a>
+                    
+                        <a href="https://woini.men/tag/4RKJcJnKa/" class="post-tags">
+                            # abb
                         </a>
                     
                 </div>
                 <div class="post-content">
-                    <pre><code class="language-dart">// seconds的值为延时时间, seconds表示延时单位为秒
-Future.delayed(Duration(seconds: 1), (){
-    print('延时1s执行');
-});
-</code></pre>
+                    <h3 id="什么是zonedata">什么是zonedata？</h3>
+<p>机器人转弯半径，即机器人在运行两句运动指令时，若设置了转弯半径，机器人会平滑的过渡，转弯半径意义为，机器人进入到设置点半径内的位置，机器人开始过渡。</p>
+<h3 id="什么是fine">什么是fine？</h3>
+<p>如果要准确到达一个位置，使用fine</p>
+<h3 id="z0和fine的区别">z0和fine的区别？</h3>
+<p>轨迹上，z0和fine类似。但fine除了<code>准确到达</code>，还有一个<code>阻止程序预读</code>的功能</p>
+<figure data-type="image" tabindex="1"><img src="https://woini.men/post-images/1588933765211.jpeg" alt="" loading="lazy"></figure>
+<p>图1 21行使用z0</p>
+<figure data-type="image" tabindex="2"><img src="https://woini.men/post-images/1588933783331.jpeg" alt="" loading="lazy"></figure>
+<p>图2 21行使用fine</p>
+<p>机器人运行的时候，示教器有2个图标，一个是左侧的箭头，表示程序已经读取到哪一行，还有一个是机器人图标，表示机器人实际在走哪一行。为了要实现平滑过渡等功能，机器人要预读几行代码。</p>
+<p>如果使用了图1的z0，机器人在走第21行，程序已经执行到23行，即机器人还没走到位置已经打开do</p>
+<p>如果使用了图2 的fine，机器人在走第21行，程序还在21行，即有了fine，程序指针不会预读，即机器人走完21行后，才会执行打开do。</p>
+<h3 id="来源">来源</h3>
+<p>ABB机器人实战技巧</p>
 
                 </div>
             </article>
@@ -113,8 +127,8 @@ Future.delayed(Duration(seconds: 1), (){
         
             <div class="next-post">
                 <div class="next gt-c-content-color-first">下一篇</div>
-                <a href="https://woini.men/post/X2NL2VHpW/" class="post-title gt-a-link">
-                    Wails运行时（人/机翻译）
+                <a href="https://woini.men/post/uiBsyb7wJ/" class="post-title gt-a-link">
+                    ABB工业机器人错误处理小记
                 </a>
             </div>
         
