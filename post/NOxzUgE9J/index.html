@@ -4,7 +4,7 @@
 <meta name="description" content=""/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 <title>ABB工业机器人变量小计 | 男友日记</title>
-<link rel="shortcut icon" href="https://woini.men/favicon.ico?v=1588933950522">
+<link rel="shortcut icon" href="https://woini.men/favicon.ico?v=1588993147894">
 <link href="https://cdn.bootcss.com/font-awesome/5.11.2/css/all.css" rel="stylesheet">
 <link rel="stylesheet" href="https://woini.men/styles/main.css">
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
@@ -175,10 +175,11 @@
 <font style="text-align: center; display: block"><code>完整类型列表可在此处查阅</code></font></p>
 <h3 id="自定义类型">自定义类型</h3>
 <p>可使用关键字<code>RECORD</code>和<code>ENDRECORD</code>定义自定义类型。</p>
-<pre><code class="language-shell">REVORD demo
-    bool isAdmin;
-    num age;
-ENDREVORD
+<pre><code class="language-shell">! Customize type
+RECORD result
+    bool ok;
+    string text;
+ENDRECORD
 </code></pre>
 <blockquote>
 <p><code>只能在模块顶部创建自定义类型</code>。</p>
