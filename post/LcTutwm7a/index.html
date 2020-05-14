@@ -3,7 +3,7 @@
     <meta charset="utf-8"/>
 <meta name="description" content=""/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Hello Gridea | 男友日记</title>
+<title>ABB机器人小记: 实例程序(PROC)与功能函数(FUNC) | 男友日记</title>
 <link rel="shortcut icon" href="https://woini.men/favicon.ico?v=1589457945018">
 <link href="https://cdn.bootcss.com/font-awesome/5.11.2/css/all.css" rel="stylesheet">
 <link rel="stylesheet" href="https://woini.men/styles/main.css">
@@ -87,44 +87,67 @@
         <div class="post-detail gt-bg-theme-color-second">
             <article class="gt-post-content">
                 <h2 class="post-title">
-                    Hello Gridea
+                    ABB机器人小记: 实例程序(PROC)与功能函数(FUNC)
                 </h2>
                 <div class="post-info">
                     <time class="post-time gt-c-content-color-first">
-                        · 2018-12-12 ·
+                        · 2020-05-14 ·
                     </time>
                     
-                        <a href="https://woini.men/tag/3V0-VKPgA/" class="post-tags">
-                            # Gridea
+                        <a href="https://woini.men/tag/BHk7eWKDI/" class="post-tags">
+                            # 学渣笔记
+                        </a>
+                    
+                        <a href="https://woini.men/tag/4RKJcJnKa/" class="post-tags">
+                            # abb
                         </a>
                     
                 </div>
                 <div class="post-content">
-                    <p>👏  欢迎使用 <strong>Gridea</strong> ！<br>
-✍️  <strong>Gridea</strong> 一个静态博客写作客户端。你可以用它来记录你的生活、心情、知识、笔记、创意... ...</p>
-<!-- more -->
-<p><a href="https://github.com/getgridea/gridea">Github</a><br>
-<a href="https://gridea.dev/">Gridea 主页</a></p>
-<h2 id="特性">特性👇</h2>
-<p>📝  你可以使用最酷的 <strong>Markdown</strong> 语法，进行快速创作</p>
-<p>🌉  你可以给文章配上精美的封面图和在文章任意位置插入图片</p>
-<p>🏷️  你可以对文章进行标签分组</p>
-<p>📋  你可以自定义菜单，甚至可以创建外部链接菜单</p>
-<p>💻  你可以在 <strong>Windows</strong>，<strong>MacOS</strong> 或 <strong>Linux</strong> 设备上使用此客户端</p>
-<p>🌎  你可以使用 <strong>𝖦𝗂𝗍𝗁𝗎𝖻 𝖯𝖺𝗀𝖾𝗌</strong> 或 <strong>Coding Pages</strong> 向世界展示，未来将支持更多平台</p>
-<p>💬  你可以进行简单的配置，接入 <a href="https://github.com/gitalk/gitalk">Gitalk</a> 或 <a href="https://github.com/SukkaW/DisqusJS">DisqusJS</a> 评论系统</p>
-<p>🇬🇧  你可以使用<strong>中文简体</strong>或<strong>英语</strong></p>
-<p>🌁  你可以任意使用应用内默认主题或任意第三方主题，强大的主题自定义能力</p>
-<p>🖥  你可以自定义源文件夹，利用 OneDrive、百度网盘、iCloud、Dropbox 等进行多设备同步</p>
-<p>🌱 当然 <strong>Gridea</strong> 还很年轻，有很多不足，但请相信，它会不停向前 🏃</p>
-<p>未来，它一定会成为你离不开的伙伴</p>
-<p>尽情发挥你的才华吧！</p>
-<p>😘 Enjoy~</p>
+                    <h3 id="proc-实例程序">PROC 实例程序</h3>
+<pre><code class="language-shell">PROC main()
+    TPWrite &quot;Hi, ABB!&quot;;
+ ENDPROC
+</code></pre>
+<blockquote>
+<p>将在示教器上显示：<code>Hi, ABB!</code>。</p>
+</blockquote>
+<h3 id="func-功能函数">FUNC 功能函数</h3>
+<pre><code class="language-shell">PROC main()
+    ! 功能函数调用
+    TPWrite hello();
+ENDPROC
+
+! 功能函数声明
+FUNC string hello()
+    return &quot;Hello ABB!&quot;;
+ENDFUNC
+</code></pre>
+<blockquote>
+<p>将在示教器上显示：<code>Hello ABB!</code>。</p>
+</blockquote>
+<h3 id="两者区别">两者区别</h3>
+<ul>
+<li><code>PROC</code>没有返回值，<code>FUNC</code>有返回值。</li>
+<li><code>PROC</code>调用时直接输入名称即可，<code>FUCNC</code>调用时需要在名称后加括号(<code>()</code>)。</li>
+</ul>
+<h3 id="两者共同点">两者共同点</h3>
+<ul>
+<li>支持<code>可选参数</code>(<code>switch</code>)</li>
+<li>支持<code>值传递</code>与<code>引用传递</code>(<code>inout\var</code>)</li>
+</ul>
 
                 </div>
             </article>
         </div>
 
+        
+            <div class="next-post">
+                <div class="next gt-c-content-color-first">下一篇</div>
+                <a href="https://woini.men/post/W43Mp6UN2/" class="post-title gt-a-link">
+                    ABB机器人G代码画图实例
+                </a>
+            </div>
         
 
         
