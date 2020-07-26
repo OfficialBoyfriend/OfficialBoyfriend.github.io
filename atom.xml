@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://woini.men</id>
     <title>男友日记</title>
-    <updated>2020-07-09T14:21:05.560Z</updated>
+    <updated>2020-07-26T06:41:00.287Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://woini.men"/>
     <link rel="self" href="https://woini.men/atom.xml"/>
@@ -10,6 +10,13 @@
     <logo>https://woini.men/images/avatar.png</logo>
     <icon>https://woini.men/favicon.ico</icon>
     <rights>All rights reserved 2020, 男友日记</rights>
+    <entry>
+        <title type="html"><![CDATA[Go-Kit 微服务基础功能演示]]></title>
+        <id>https://woini.men/post/81V3RlCa3/</id>
+        <link href="https://woini.men/post/81V3RlCa3/">
+        </link>
+        <updated>2020-07-26T06:26:03.000Z</updated>
+    </entry>
     <entry>
         <title type="html"><![CDATA[GoLang strings包常用函数记录]]></title>
         <id>https://woini.men/post/Q-yQLUXiz/</id>
@@ -72,16 +79,5 @@
         <link href="https://woini.men/post/hVdDMTLdV/">
         </link>
         <updated>2020-05-03T08:17:54.000Z</updated>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[Git忽略规则「.gitignore」用法]]></title>
-        <id>https://woini.men/post/DMsE6GA6O/</id>
-        <link href="https://woini.men/post/DMsE6GA6O/">
-        </link>
-        <updated>2020-05-01T13:51:04.000Z</updated>
-        <summary type="html"><![CDATA[<p><code>.gitignore</code>文件的内容是一些规则，Git会根据这些规则来判断是否将文件添加到版本控制中。相当于一个简单地过滤或忽略功能，忽略掉的文件不会出现在git仓库。</p>
-]]></summary>
-        <content type="html"><![CDATA[<p><code>.gitignore</code>文件的内容是一些规则，Git会根据这些规则来判断是否将文件添加到版本控制中。相当于一个简单地过滤或忽略功能，忽略掉的文件不会出现在git仓库。</p>
-]]></content>
     </entry>
 </feed>
