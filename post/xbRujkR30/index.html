@@ -3,7 +3,7 @@
     <meta charset="utf-8"/>
 <meta name="description" content=""/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>ABB机器人小记: 实例程序(PROC)与功能函数(FUNC) | 男友日记</title>
+<title>Dart 反射基础实例 | 男友日记</title>
 <link rel="shortcut icon" href="https://woini.men/favicon.ico?v=1601215883517">
 <link href="https://cdn.bootcss.com/font-awesome/5.11.2/css/all.css" rel="stylesheet">
 <link rel="stylesheet" href="https://woini.men/styles/main.css">
@@ -87,55 +87,77 @@
         <div class="post-detail gt-bg-theme-color-second">
             <article class="gt-post-content">
                 <h2 class="post-title">
-                    ABB机器人小记: 实例程序(PROC)与功能函数(FUNC)
+                    Dart 反射基础实例
                 </h2>
                 <div class="post-info">
                     <time class="post-time gt-c-content-color-first">
-                        · 2020-05-14 ·
+                        · 2020-09-27 ·
                     </time>
                     
                         <a href="https://woini.men/tag/BHk7eWKDI/" class="post-tags">
                             # 学渣笔记
                         </a>
                     
-                        <a href="https://woini.men/tag/4RKJcJnKa/" class="post-tags">
-                            # abb
+                        <a href="https://woini.men/tag/x-Esozvy9/" class="post-tags">
+                            # dart
                         </a>
                     
                 </div>
                 <div class="post-content">
-                    <h3 id="proc-实例程序">PROC 实例程序</h3>
-<pre><code class="language-shell">PROC main()
-    TPWrite &quot;Hi, ABB!&quot;;
- ENDPROC
-</code></pre>
-<blockquote>
-<p>将在示教器上显示：<code>Hi, ABB!</code>。</p>
-</blockquote>
-<h3 id="func-功能函数">FUNC 功能函数</h3>
-<pre><code class="language-shell">PROC main()
-    ! 功能函数调用
-    TPWrite hello();
-ENDPROC
+                    <pre><code class="language-dart">import 'dart:mirrors';
 
-! 功能函数声明
-FUNC string hello()
-    return &quot;Hello ABB!&quot;;
-ENDFUNC
+@Todo('class')
+abstract class TestMixin {
+  @Todo('Declaration')
+  String name;
+
+  void getRequest(@Todo('arg') String param);
+}
+
+class Todo {
+  final String name;
+
+  const Todo(this.name);
+}
+
+main(List&lt;String&gt; args) {
+  getWorkAnnotation();
+}
+
+void getWorkAnnotation() {
+  ClassMirror classMirror = reflectClass(TestMixin);
+
+  // 获取 class 上的元数据
+  classMirror.metadata.forEach((metadata) {
+    print(metadata.reflectee?.name);
+  });
+
+  classMirror.declarations.forEach((Symbol key, DeclarationMirror value) {
+    // 获取 declaration 上的元数据
+    if (value is DeclarationMirror) {
+      value.metadata.forEach((metadata) {
+        print(metadata.reflectee.name);
+      });
+    }
+
+    // 获取方法中参数上的元数据
+    if (value is MethodMirror) {
+      value.parameters.forEach((param) {
+        //if (value.simpleName == #getRequest) {
+        param.metadata.forEach((metadata) {
+          print(metadata.reflectee.name);
+        });
+        //}
+      });
+    }
+  });
+}
 </code></pre>
-<blockquote>
-<p>将在示教器上显示：<code>Hello ABB!</code>。</p>
-</blockquote>
-<h3 id="两者区别">两者区别</h3>
-<ul>
-<li><code>PROC</code>没有返回值，<code>FUNC</code>有返回值。</li>
-<li><code>PROC</code>调用时直接输入名称即可，<code>FUCNC</code>调用时需要在名称后加括号(<code>()</code>)。</li>
-</ul>
-<h3 id="两者共同点">两者共同点</h3>
-<ul>
-<li>支持<code>可选参数</code>(<code>switch</code>)</li>
-<li>支持<code>值传递</code>与<code>引用传递</code>(<code>inout\var</code>)</li>
-</ul>
+<p>运行结果:</p>
+<pre><code class="language-text">class
+field
+arg
+</code></pre>
 
                 </div>
             </article>
@@ -144,8 +166,8 @@ ENDFUNC
         
             <div class="next-post">
                 <div class="next gt-c-content-color-first">下一篇</div>
-                <a href="https://woini.men/post/W43Mp6UN2/" class="post-title gt-a-link">
-                    ABB机器人G代码画图实例
+                <a href="https://woini.men/post/81V3RlCa3/" class="post-title gt-a-link">
+                    Go-Kit 微服务基础功能演示
                 </a>
             </div>
         
