@@ -4,7 +4,7 @@
 <meta name="description" content=""/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 <title>Dart 反射基础实例 | 男友日记</title>
-<link rel="shortcut icon" href="https://woini.men/favicon.ico?v=1601216202534">
+<link rel="shortcut icon" href="https://woini.men/favicon.ico?v=1601217343451">
 <link href="https://cdn.bootcss.com/font-awesome/5.11.2/css/all.css" rel="stylesheet">
 <link rel="stylesheet" href="https://woini.men/styles/main.css">
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
@@ -104,14 +104,16 @@
                     
                 </div>
                 <div class="post-content">
-                    <pre><code class="language-dart">import 'dart:mirrors';
+                    <h2 id="实例">实例</h2>
+<pre><code class="language-dart">import 'dart:mirrors';
 
-@Todo('class')
+@Todo('类')
 abstract class TestMixin {
-  @Todo('Declaration')
+  @Todo('属性')
   String name;
 
-  void getRequest(@Todo('arg') String param);
+  @Todo('方法')
+  void getRequest(@Todo('参数') String param);
 }
 
 class Todo {
@@ -133,19 +135,22 @@ void getWorkAnnotation() {
   });
 
   classMirror.declarations.forEach((Symbol key, DeclarationMirror value) {
-    // 获取 declaration 上的元数据
+    // 获取属性上的元数据
     if (value is DeclarationMirror) {
       value.metadata.forEach((metadata) {
-        print(metadata.reflectee.name);
+        print(metadata.reflectee?.name);
       });
     }
 
     // 获取方法中参数上的元数据
     if (value is MethodMirror) {
+      value.metadata.forEach((metadata) {
+        print(metadata.reflectee?.name);
+      });
       value.parameters.forEach((param) {
         //if (value.simpleName == #getRequest) {
         param.metadata.forEach((metadata) {
-          print(metadata.reflectee.name);
+          print(metadata.reflectee?.name);
         });
         //}
       });
@@ -153,11 +158,142 @@ void getWorkAnnotation() {
   });
 }
 </code></pre>
-<p>运行结果:</p>
-<pre><code class="language-text">class
-field
-arg
+<h2 id="运行结果">运行结果</h2>
+<pre><code class="language-text">类
+属性
+方法
+方法
+参数
 </code></pre>
+<h2 id="补充">补充</h2>
+<h3 id="反射类">反射类</h3>
+<pre><code class="language-dart">abstract class ClassMirror implements TypeMirror, ObjectMirror {
+
+  ClassMirror get superclass;  //父类 ， Object的父类为null
+
+  List&lt;ClassMirror&gt; get superinterfaces; //接口列表
+
+  bool get isAbstract; //是否抽象类
+
+  bool get isEnum;     //是否枚举类
+
+  //只包含自己原本的方法（构造方法、setter/getter、普通方法、静态方法）、成员（普通成员、静态成员），不包含继承来的
+  //注意: 属性是VariableMirror，实现了setter/getter的属性为MethodMirror
+  Map&lt;Symbol, DeclarationMirror&gt; get declarations;
+
+  //包含构造方法、setter/getter、普通方法，包含继承来的
+  Map&lt;Symbol, MethodMirror&gt; get instanceMembers;
+
+  //静态方法及静态属性的setter/getter方法，包含继承来的
+  //与instanceMembers合在一起就是类中全部的方法
+  Map&lt;Symbol, MethodMirror&gt; get staticMembers;
+
+  //如果S = A with B ,那么ClassMirror（S）.mixin 为 ClassMirror（B），否则返回本身
+  ClassMirror get mixin;
+
+  /**
+   * 调用构造方法
+   * constructorName 构造方法名称（默认构造方法为空字符串，命名构造方法为其命名）
+   * positionalArguments 参数列表
+   */
+  InstanceMirror newInstance(Symbol constructorName, List positionalArguments,
+      [Map&lt;Symbol, dynamic&gt; namedArguments]);
+
+  bool operator ==(other); //判断是否相等
+
+  bool isSubclassOf(ClassMirror other); //判断是不是other的子类
+}
+</code></pre>
+<pre><code class="language-dart">abstract class Symbol {
+  
+  static const Symbol unaryMinus = const Symbol(&quot;unary-&quot;);
+
+  static const Symbol empty = const Symbol(&quot;&quot;);
+
+  //构造方法,也可使用#来创建
+  //Symbol(&quot;A&quot;) == #A
+  const factory Symbol(String name) = internal.Symbol;
+
+  int get hashCode;
+
+  bool operator ==(other);
+}
+
+/*
+class A { var a = 1;}
+Symbol(&quot;A&quot;) == #A                //方法、类、参数直接用名字
+Symbol(&quot;A.t&quot;) == #A.t            //命名构造方法也是直接用名字
+Symbol(&quot;a=&quot;) == #a=              //属性set方法(私有属性即为#_a=)
+Symbol(&quot;a&quot;) == #a                //属性get方法
+Symbol(&quot;==&quot;) == #==              //操作符直接使用符号 
+Symbol(&quot;&quot;) == Symbol.empty 
+*/
+</code></pre>
+<h3 id="方法反射">方法反射</h3>
+<pre><code class="language-dart">abstract class MethodMirror implements DeclarationMirror {
+
+  TypeMirror get returnType; //反射类型
+
+  String get source; //source code ， 不可用返回null
+
+  List&lt;ParameterMirror&gt; get parameters; //参数列表
+
+  bool get isStatic; //是否静态方法
+
+  bool get isAbstract;//是否抽象方法
+
+  bool get isSynthetic;//Synthetic方法（即隐式的setter/getter或构造方法[只定义属性或无构造函数]）
+
+  bool get isRegularMethod; //常规方法（即非setter/getter、构造方法）
+
+  bool get isOperator; //操作符方法
+
+  bool get isGetter; //get方法
+
+  bool get isSetter; //set方法
+
+  bool get isConstructor;      //判断是否构造方法
+
+  Symbol get constructorName;   //获得构造方法的名字，默认构造方法为空字符串
+
+  bool get isConstConstructor;   //常量构造方法
+
+  bool get isGenerativeConstructor;
+
+  bool get isRedirectingConstructor;//重定向构造方法
+
+  bool get isFactoryConstructor;  //工厂构造方法
+
+  bool operator ==(other);
+}
+</code></pre>
+<h3 id="属性反射">属性反射</h3>
+<pre><code class="language-dart">abstract class DeclarationMirror implements Mirror {
+
+  Symbol get simpleName; //简称
+
+  Symbol get qualifiedName; //全称，包含路径
+
+  //库 -&gt; null
+  //类、顶级函数或变量、typedef -&gt; 库
+  //S with M -&gt; M
+  //类中的方法、变量 -&gt; 类
+  //函数中的局部变量、函数 -&gt; 函数
+  DeclarationMirror get owner;  //所有者
+
+  bool get isPrivate;  //私有
+
+  bool get isTopLevel;  //顶级
+
+  //格式：dart:core/runtime/libobject_patch.dart:53
+  SourceLocation get location; //来源，标明方法、类、属性所在文件的位置
+
+  List&lt;InstanceMirror&gt; get metadata; //元数据列表
+}
+</code></pre>
+<blockquote>
+<p>更多参考：www.jianshu.com/p/d68278d19f79</p>
+</blockquote>
 
                 </div>
             </article>
